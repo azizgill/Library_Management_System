@@ -42,13 +42,13 @@ public class Main {
             System.out.println("===============================================");
 
             System.out.print("Enter your choice: ");
-            choice = Integer.parseInt(sc.nextLine());
+            choice = readInt(sc);
 
             switch (choice) {
 
                 case 1:
                     System.out.print("Book ID: ");
-                    int id = Integer.parseInt(sc.nextLine());
+                    int id = readPositiveInt(sc);
 
                     System.out.print("Title: ");
                     String title = sc.nextLine();
@@ -60,20 +60,18 @@ public class Main {
                     String category = sc.nextLine();
 
                     library.addBook(
-                        new Book(id, title, author, category)
-                    );
+                            new Book(id, title, author, category));
                     break;
 
                 case 2:
                     System.out.print("Enter Book ID: ");
                     library.removeBook(
-                        Integer.parseInt(sc.nextLine())
-                    );
+                            readPositiveInt(sc));
                     break;
 
                 case 3:
                     System.out.print("Enter Book ID: ");
-                    int updateId = Integer.parseInt(sc.nextLine());
+                    int updateId = readPositiveInt(sc);
 
                     System.out.print("New Title: ");
                     String newTitle = sc.nextLine();
@@ -85,8 +83,7 @@ public class Main {
                     String newCategory = sc.nextLine();
 
                     library.updateBook(
-                        updateId, newTitle, newAuthor, newCategory
-                    );
+                            updateId, newTitle, newAuthor, newCategory);
                     break;
 
                 case 4:
@@ -96,8 +93,7 @@ public class Main {
                 case 5:
                     System.out.print("Enter Book ID: ");
                     library.searchById(
-                        Integer.parseInt(sc.nextLine())
-                    );
+                            readPositiveInt(sc));
                     break;
 
                 case 6:
@@ -121,7 +117,7 @@ public class Main {
 
                 case 10:
                     System.out.print("Member ID: ");
-                    int memberId = Integer.parseInt(sc.nextLine());
+                    int memberId = readPositiveInt(sc);
 
                     System.out.print("Name: ");
                     String name = sc.nextLine();
@@ -133,8 +129,7 @@ public class Main {
                     String phone = sc.nextLine();
 
                     library.registerMember(
-                        new Member(memberId, name, email, phone)
-                    );
+                            new Member(memberId, name, email, phone));
                     break;
 
                 case 11:
@@ -144,16 +139,15 @@ public class Main {
                 case 12:
                     System.out.print("Enter Member ID: ");
                     library.searchMember(
-                        Integer.parseInt(sc.nextLine())
-                    );
+                            readPositiveInt(sc));
                     break;
 
                 case 13:
                     System.out.print("Book ID: ");
-                    int issueBookId = Integer.parseInt(sc.nextLine());
+                    int issueBookId = readPositiveInt(sc);
 
                     System.out.print("Member ID: ");
-                    int issueMemberId = Integer.parseInt(sc.nextLine());
+                    int issueMemberId = readPositiveInt(sc);
 
                     library.issueBook(issueBookId, issueMemberId);
                     break;
@@ -161,8 +155,7 @@ public class Main {
                 case 14:
                     System.out.print("Book ID: ");
                     library.returnBook(
-                        Integer.parseInt(sc.nextLine())
-                    );
+                            readPositiveInt(sc));
                     break;
 
                 case 15:
@@ -184,5 +177,38 @@ public class Main {
         } while (choice != 0);
 
         sc.close();
+
+    }
+    // safety reads integer from the user
+
+    public static int readInt(Scanner sc) {
+
+        while (true) {
+            try {
+                return Integer.parseInt(sc.nextLine());
+
+            }
+
+            catch (NumberFormatException e) {
+                System.out.print("Invalid input!. Please enter an integer:");
+            }
+        }
+
+    }
+    // safly reads positive integer from the user
+
+    public static int readPositiveInt(Scanner sc){
+        
+        while (true){
+            int num= readInt(sc);
+
+            if(num>0){
+                return num;
+            }
+
+            else{
+                System.out.print("Enter a positive integer: ");
+            }
+        }
     }
 }
