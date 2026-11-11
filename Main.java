@@ -51,13 +51,13 @@ public class Main {
                     int id = readPositiveInt(sc);
 
                     System.out.print("Title: ");
-                    String title = sc.nextLine();
+                    String title =  readNonEmpty(sc);
 
                     System.out.print("Author: ");
-                    String author = sc.nextLine();
+                    String author = readNonEmpty(sc);
 
                     System.out.print("Category: ");
-                    String category = sc.nextLine();
+                    String category = readNonEmpty(sc);
 
                     library.addBook(
                             new Book(id, title, author, category));
@@ -74,13 +74,13 @@ public class Main {
                     int updateId = readPositiveInt(sc);
 
                     System.out.print("New Title: ");
-                    String newTitle = sc.nextLine();
+                    String newTitle = readNonEmpty(sc);
 
                     System.out.print("New Author: ");
-                    String newAuthor = sc.nextLine();
+                    String newAuthor = readNonEmpty(sc);
 
                     System.out.print("New Category: ");
-                    String newCategory = sc.nextLine();
+                    String newCategory = readNonEmpty(sc);
 
                     library.updateBook(
                             updateId, newTitle, newAuthor, newCategory);
@@ -98,17 +98,17 @@ public class Main {
 
                 case 6:
                     System.out.print("Enter Title: ");
-                    library.searchByTitle(sc.nextLine());
+                    library.searchByTitle(readNonEmpty(sc));
                     break;
 
                 case 7:
                     System.out.print("Enter Author: ");
-                    library.searchByAuthor(sc.nextLine());
+                    library.searchByAuthor(readNonEmpty(sc));
                     break;
 
                 case 8:
                     System.out.print("Enter Category: ");
-                    library.searchByCategory(sc.nextLine());
+                    library.searchByCategory(readNonEmpty(sc));
                     break;
 
                 case 9:
@@ -120,13 +120,13 @@ public class Main {
                     int memberId = readPositiveInt(sc);
 
                     System.out.print("Name: ");
-                    String name = sc.nextLine();
+                    String name = readNonEmpty(sc);
 
                     System.out.print("Email: ");
-                    String email = sc.nextLine();
+                    String email = readNonEmpty(sc);
 
                     System.out.print("Phone: ");
-                    String phone = sc.nextLine();
+                    String phone = readNonEmpty(sc);
 
                     library.registerMember(
                             new Member(memberId, name, email, phone));
@@ -211,4 +211,17 @@ public class Main {
             }
         }
     }
+    // Reads text and prevents empty input
+public static String readNonEmpty(Scanner sc) {
+
+    while (true) {
+        String input = sc.nextLine().trim();
+
+        if (!input.isEmpty()) {
+            return input;
+        }
+
+        System.out.print("Input cannot be empty. Try again: ");
+    }
+}
 }
